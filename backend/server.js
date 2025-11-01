@@ -22,28 +22,10 @@ const mpDataService = new MPDataService();
 // Middleware
 app.use(helmet());
 app.use(compression());
-
-const allowedOrigins = [
-  'https://mgnrega-brown.vercel.app',  // Production frontend
-  process.env.FRONTEND_URL_2,          // optional second frontend
-  'http://localhost:5173',
-  'http://localhost:3000',
-  /\.vercel\.app$/                     // allow *.vercel.app (optional)
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    const isAllowed = allowedOrigins.some(entry => {
-      if (!entry) return false;
-      if (entry instanceof RegExp) return entry.test(origin);
-      return entry === origin;
-    });
-    return isAllowed ? callback(null, true) : callback(new Error('Not allowed by CORS'));
-  },
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173' || 'https://mgnrega-brown.vercel.app/',
   credentials: true
 }));
-
 app.use(express.json());
 
 // Rate limiting
