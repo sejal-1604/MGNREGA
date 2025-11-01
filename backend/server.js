@@ -11,7 +11,7 @@ const MPDataService = require('./mpDataService');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.https://mgnrega-brown.vercel.app/;
 
 // Cache setup - cache for 1 hour
 const cache = new NodeCache({ stdTTL: 3600 });
