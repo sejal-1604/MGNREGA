@@ -21,8 +21,11 @@ const mpDataService = new MPDataService();
 
 // Middleware
 app.use(helmet());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173' || 'https://mgnrega-brown.vercel.app/',
+  credentials: true
+}));
 app.use(compression());
-app.use(cors());
 app.use(express.json());
 
 // Rate limiting
