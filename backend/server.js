@@ -38,6 +38,22 @@ app.use('/api/', limiter);
 // Note: Using MPDataService initialized above - no need for old MGNREGADataService
 
 // API Routes
+// Root route for service info
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    name: 'MGNREGA Dashboard Backend',
+    message: 'Use the /api routes listed below',
+    endpoints: {
+      health: '/api/health',
+      districts: '/api/districts',
+      districtById: '/api/districts/:districtId',
+      states: '/api/states',
+      refreshData: '/api/refresh-data'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
 app.get('/api/health', (req, res) => {
   const uptime = process.uptime();
   const memoryUsage = process.memoryUsage();
